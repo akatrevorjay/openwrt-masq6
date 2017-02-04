@@ -4,7 +4,7 @@
 #
 # Place as: /etc/firewall.d/with_reload/90-nat6.fw and make it executable.
 #
-# Then you can configure in /etc/firewall per zone, ala where you have:
+# Then you can configure in /etc/config/firewall per zone, ala where you have:
 #   option masq 1
 # Just drop this in beneath it:
 #   option masq6 1
