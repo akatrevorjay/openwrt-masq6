@@ -11,11 +11,12 @@
 # For IPv6 privacy (temporary addresses used for outgoing), also add:
 #   option masq6_privacy 1
 #
-# Thanks! Hope it's useful!
+# Hope it's useful!
 #
+# https://github.com/akatrevorjay/openwrt-masq6
 # ~ trevorj <github@trevor.joynson.io>
 #
- 
+
 set -eo pipefail
 
 . /lib/functions.sh
@@ -67,11 +68,11 @@ masq6_network() {
 
     if [ $zone_masq6_privacy -eq 1 ]; then
         log "Enabling IPv6 temporary addresses for device=\"$device\"."
-        
+
         log "Accepting router advertisements on $device even if forwarding is enabled (required for temporary addresses)"
         echo 2 > "/proc/sys/net/ipv6/conf/$device/accept_ra" \
           || log "Error: Failed to change router advertisements accept policy on $device (required for temporary addresses)"
-    
+
         log "Using temporary addresses for outgoing connections on interface $device"
         echo 2 > "/proc/sys/net/ipv6/conf/$device/use_tempaddr" \
           || log "Error: Failed to enable temporary addresses for outgoing connections on interface $device"
@@ -123,5 +124,4 @@ main() {
     config_foreach handle_zone zone
 }
 
-main
-
+main "$@"
